@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
+import { injectIntl, defineMessages, FormattedHTMLMessage } from 'react-intl';
 import logo from './logo.svg';
 import './App.css';
 
+
+const messages = defineMessages({
+  htmlTest: {
+    id: 'app.htmlTest',
+    defaultMessage:'<b>Foo</b> bar'
+  }
+});
+
 class App extends Component {
   render() {
+    const { intl } = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+           {intl.formatHTMLMessage(messages.htmlTest)}
+          </p>
+          <p>
+           <FormattedHTMLMessage
+            id="app.test2"
+            defaultMessage="<b>Foo</b> bar 2"
+          />
           </p>
           <a
             className="App-link"
@@ -25,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default injectIntl(App);
